@@ -33,11 +33,13 @@ class Wolf(RandomWalker):
     def __init__(self, unique_id, pos, model, moore, energy=None):
         super().__init__(unique_id, pos, model, moore=moore)
         self.energy = energy
+        self.reproduce = False
 
     def step(self):
         self.random_move()
+        self.energy -= 1
         # ... to be completed
-
+        
 
 class GrassPatch(Agent):
     """
@@ -54,6 +56,8 @@ class GrassPatch(Agent):
         """
         super().__init__(unique_id, model)
         # ... to be completed
+        self.fully_groun = fully_grown
+        self.countdown = countdown
 
-    def step(self):
+    # def step(self):
         # ... to be completed
