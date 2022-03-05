@@ -57,7 +57,7 @@ class GrassPatch(Agent):
         """
         super().__init__(unique_id, model)
         # ... to be completed
-        self.fully_groun = fully_grown
+        self.fully_grown = fully_grown
         self.countdown = countdown
 
     # def step(self):
