@@ -2,18 +2,22 @@ from mesa import Agent
 from prey_predator.random_walk import RandomWalker
 
 
-class Sheep(RandomWalker):
+class Sheep(RandomWalker): #Les moutons vont hériter de random walker 
     """
     A sheep that walks around, reproduces (asexually) and gets eaten.
 
     The init is the same as the RandomWalker.
     """
-
+#position : tupple, definir au moment ou on créer les agents. Passer le paramètre x et y dans l'agent.
+#initialiser energie à une variable
     energy = None
 
     def __init__(self, unique_id, pos, model, moore, energy=None):
         super().__init__(unique_id, pos, model, moore=moore)
         self.energy = energy
+        
+    def eat_grass():
+        
 
     def step(self):
         """

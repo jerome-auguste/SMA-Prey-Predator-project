@@ -91,7 +91,26 @@ class WolfSheep(Model):
         )
 
         # Create sheep:
-        # ... to be completed
+        for i in range(self.initial_sheep):
+            #choix position taux d'energie création, 
+            sheep = Sheep(i, pos, self, False, energy = tirage aléatoire)
+            #Placer sur le grille
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            #Comportement dans la classe agent if energy <0, on enlève l'agent du scheduler, self.model....remove(self), self.model.grid.remove(grid), 
+            #if grass, self.model.energy
+            #Modèle à base de règle
+            #sefl.move: checker contenue, if grass, augmenter l'energie du mouton 
+            
 
         # Create wolves
         # ... to be completed
