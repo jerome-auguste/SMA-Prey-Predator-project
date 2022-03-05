@@ -41,19 +41,18 @@ class WolfSheep(Model):
         "A model for simulating wolf and sheep (predator-prey) ecosystem modelling."
     )
 
-    def __init__(
-        self,
-        height=20,
-        width=20,
-        initial_sheep=100,
-        initial_wolves=50,
-        sheep_reproduce=0.04,
-        wolf_reproduce=0.05,
-        wolf_gain_from_food=20,
-        grass=False,
-        grass_regrowth_time=30,
-        sheep_gain_from_food=4,
-    ):
+    def __init__(self,
+                 height=20,
+                 width=20,
+                 initial_sheep=100,
+                 initial_wolves=50,
+                 sheep_reproduce=0.04,
+                 wolf_reproduce=0.05,
+                 wolf_gain_from_food=20,
+                 grass=True,
+                 grass_regrowth_time=30,
+                 sheep_gain_from_food=4,
+                 initial_grass_countdown=10):
         """
         Create a new Wolf-Sheep model with the given parameters.
 
@@ -80,43 +79,52 @@ class WolfSheep(Model):
         self.grass = grass
         self.grass_regrowth_time = grass_regrowth_time
         self.sheep_gain_from_food = sheep_gain_from_food
+        self.initial_grass_countdown = initial_grass_countdown
 
         self.schedule = RandomActivationByBreed(self)
         self.grid = MultiGrid(self.height, self.width, torus=True)
-        self.datacollector = DataCollector(
-            {
-                "Wolves": lambda m: m.schedule.get_breed_count(Wolf),
-                "Sheep": lambda m: m.schedule.get_breed_count(Sheep),
-            }
-        )
+        self.datacollector = DataCollector({
+            "Wolves":
+            lambda m: m.schedule.get_breed_count(Wolf),
+            "Sheep":
+            lambda m: m.schedule.get_breed_count(Sheep),
+        })
 
         # Create sheep:
-        for i in range(self.initial_sheep):
-            #choix position taux d'energie création, 
-            sheep = Sheep(i, pos, self, False, energy = tirage aléatoire)
-            #Placer sur le grille
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            #Comportement dans la classe agent if energy <0, on enlève l'agent du scheduler, self.model....remove(self), self.model.grid.remove(grid), 
-            #if grass, self.model.energy
-            #Modèle à base de règle
-            #sefl.move: checker contenue, if grass, augmenter l'energie du mouton 
-            
+
+        # ... to be completed
+        max_id = 0
+        for _ in range(self.initial_sheep):
+            x = self.random.randrange(self.grid.width)
+            y = self.random.randrange(self.grid.height)
+            a = Sheep(max_id, (x, y), self, moore=True,
+                      energy=20)  # TODO : Custom energy value
+            max_id += 1
+            self.schedule.add(a)
+            self.grid.place_agent(a, (x, y))
 
         # Create wolves
         # ... to be completed
+        for _ in range(self.initial_wolves):
+            x = self.random.randrange(self.grid.width)
+            y = self.random.randrange(self.grid.height)
+            a = Wolf(max_id, (x, y), self, moore=True,
+                     energy=20)  # TODO : Custom energy value
+            max_id += 1
+            self.schedule.add(a)
+            self.grid.place_agent(a, (x, y))
 
         # Create grass patches
         # ... to be completed
+        for x in range(width):
+            for y in range(height):
+                a = GrassPatch(max_id, (x, y),
+                               self,
+                               fully_grown=True,
+                               countdown=self.initial_grass_countdown)
+                max_id += 1
+                self.schedule.add(a)
+                self.grid.place_agent(a, (x, y))
 
     def step(self):
         self.schedule.step()
@@ -129,4 +137,5 @@ class WolfSheep(Model):
     def run_model(self, step_count=200):
 
         # ... to be completed
-
+        for _ in range(step_count):
+            self.step()

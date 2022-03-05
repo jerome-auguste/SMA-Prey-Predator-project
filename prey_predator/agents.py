@@ -1,3 +1,4 @@
+"""Agents definition classes (Sheep, Wolf or GrassPatch)"""
 from mesa import Agent
 from prey_predator.random_walk import RandomWalker
 
@@ -37,9 +38,11 @@ class Wolf(RandomWalker):
     def __init__(self, unique_id, pos, model, moore, energy=None):
         super().__init__(unique_id, pos, model, moore=moore)
         self.energy = energy
+        self.reproduce = False
 
     def step(self):
         self.random_move()
+        self.energy -= 1
         # ... to be completed
 
 
@@ -58,6 +61,8 @@ class GrassPatch(Agent):
         """
         super().__init__(unique_id, model)
         # ... to be completed
+        self.fully_grown = fully_grown
+        self.countdown = countdown
 
-    def step(self):
-        # ... to be completed
+    # def step(self):
+    # ... to be completed
