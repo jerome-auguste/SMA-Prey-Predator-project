@@ -92,7 +92,6 @@ class WolfSheep(Model):
 
         # Create sheep:
         # ... to be completed
-        # self.agents = {}
         for _ in range(self.initial_sheep):
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
@@ -100,7 +99,6 @@ class WolfSheep(Model):
                       energy=20)  # TODO : Custom energy value
             self.schedule.add(a)
             self.grid.place_agent(a, (x, y))
-            # self.agents[self.current_id] = a
 
         # Create wolves
         # ... to be completed
@@ -111,7 +109,6 @@ class WolfSheep(Model):
                      energy=20)  # TODO : Custom energy value
             self.schedule.add(a)
             self.grid.place_agent(a, (x, y))
-            # self.agents[self.current_id] = a
 
         # Create grass patches
         # ... to be completed
@@ -123,23 +120,9 @@ class WolfSheep(Model):
                                countdown=self.initial_grass_countdown)
                 self.schedule.add(a)
                 self.grid.place_agent(a, (x, y))
-                # self.agents[self.current_id] = a
 
     def step(self):
         self.schedule.step()
-        # for agent in self.agents.values():
-        #     if isinstance(agent, (Sheep, Wolf)) and agent.reproduce:
-        #         if isinstance(agent, Sheep):
-        #             new_agent = Sheep(self.next_id(), agent.pos, self, moore=True,
-        #               energy=20)
-        #         else:
-        #             new_agent = Wolf(self.next_id(), agent.pos, self, moore=True,
-        #               energy=20)
-
-        #         self.agents[self.current_id] = new_agent
-        #         self.schedule.add(new_agent)
-        #         self.grid.place_agent(new_agent, agent.pos) # Placing agent at the same position as the parent
-        #         agent.reproduce = False
 
         # Collect data
         self.datacollector.collect(self)
