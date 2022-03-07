@@ -15,13 +15,20 @@ class Sheep(RandomWalker):
     def __init__(self, unique_id, pos, model, moore, energy=None):
         super().__init__(unique_id, pos, model, moore=moore)
         self.energy = energy
+        # self.reproduce = False
 
     def step(self):
         """
         A model step. Move, then eat grass and reproduce.
         """
-        self.random_move()
         # ... to be completed
+        self.random_move()
+        self.energy -= 1
+        if self.random.random() < self.model.sheep_reproduce:
+            # self.reproduce = True
+            a = Sheep(self.model.next_id(), self.pos, self.model, self.moore, energy=20)
+            self.model.schedule.add(a)
+            self.model.grid.place_agent(a, self.pos)
 
 
 class Wolf(RandomWalker):
@@ -34,12 +41,17 @@ class Wolf(RandomWalker):
     def __init__(self, unique_id, pos, model, moore, energy=None):
         super().__init__(unique_id, pos, model, moore=moore)
         self.energy = energy
-        self.reproduce = False
+        # self.reproduce = False
 
     def step(self):
+        # ... to be completed
         self.random_move()
         self.energy -= 1
-        # ... to be completed
+        if self.random.random() < self.model.wolf_reproduce:
+            # self.reproduce = True
+            a = Wolf(self.model.next_id(), self.pos, self.model, self.moore, energy=20)
+            self.model.schedule.add(a)
+            self.model.grid.place_agent(a, self.pos)
 
 
 class GrassPatch(Agent):

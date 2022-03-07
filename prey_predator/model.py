@@ -92,41 +92,54 @@ class WolfSheep(Model):
 
         # Create sheep:
         # ... to be completed
-        max_id = 0
+        # self.agents = {}
         for _ in range(self.initial_sheep):
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
-            a = Sheep(max_id, (x, y), self, moore=True,
+            a = Sheep(self.next_id(), (x, y), self, moore=True,
                       energy=20)  # TODO : Custom energy value
-            max_id += 1
             self.schedule.add(a)
             self.grid.place_agent(a, (x, y))
+            # self.agents[self.current_id] = a
 
         # Create wolves
         # ... to be completed
         for _ in range(self.initial_wolves):
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
-            a = Wolf(max_id, (x, y), self, moore=True,
+            a = Wolf(self.next_id(), (x, y), self, moore=True,
                      energy=20)  # TODO : Custom energy value
-            max_id += 1
             self.schedule.add(a)
             self.grid.place_agent(a, (x, y))
+            # self.agents[self.current_id] = a
 
         # Create grass patches
         # ... to be completed
         for x in range(width):
             for y in range(height):
-                a = GrassPatch(max_id, (x, y),
+                a = GrassPatch(self.next_id(), (x, y),
                                self,
                                fully_grown=True,
                                countdown=self.initial_grass_countdown)
-                max_id += 1
                 self.schedule.add(a)
                 self.grid.place_agent(a, (x, y))
+                # self.agents[self.current_id] = a
 
     def step(self):
         self.schedule.step()
+        # for agent in self.agents.values():
+        #     if isinstance(agent, (Sheep, Wolf)) and agent.reproduce:
+        #         if isinstance(agent, Sheep):
+        #             new_agent = Sheep(self.next_id(), agent.pos, self, moore=True,
+        #               energy=20)
+        #         else:
+        #             new_agent = Wolf(self.next_id(), agent.pos, self, moore=True,
+        #               energy=20)
+
+        #         self.agents[self.current_id] = new_agent
+        #         self.schedule.add(new_agent)
+        #         self.grid.place_agent(new_agent, agent.pos) # Placing agent at the same position as the parent
+        #         agent.reproduce = False
 
         # Collect data
         self.datacollector.collect(self)
