@@ -52,7 +52,9 @@ class WolfSheep(Model):
                  grass=True,
                  grass_regrowth_time=30,
                  sheep_gain_from_food=4,
-                 initial_grass_countdown=10):
+                 initial_grass_countdown=10,
+                 initial_sheep_energy=10,
+                 initial_wolf_energy=10):
         """
         Create a new Wolf-Sheep model with the given parameters.
 
@@ -80,6 +82,8 @@ class WolfSheep(Model):
         self.grass_regrowth_time = grass_regrowth_time
         self.sheep_gain_from_food = sheep_gain_from_food
         self.initial_grass_countdown = initial_grass_countdown
+        self.initial_sheep_energy = initial_sheep_energy
+        self.initial_wolf_energy = initial_wolf_energy
 
         self.schedule = RandomActivationByBreed(self)
         self.grid = MultiGrid(self.height, self.width, torus=True)
@@ -96,7 +100,7 @@ class WolfSheep(Model):
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
             a = Sheep(self.next_id(), (x, y), self, moore=True,
-                      energy=20)  # TODO : Custom energy value
+                      energy=self.initial_sheep_energy) 
             self.schedule.add(a)
             self.grid.place_agent(a, (x, y))
 
@@ -106,7 +110,7 @@ class WolfSheep(Model):
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
             a = Wolf(self.next_id(), (x, y), self, moore=True,
-                     energy=20)  # TODO : Custom energy value
+                     energy=self.initial_wolf_energy)
             self.schedule.add(a)
             self.grid.place_agent(a, (x, y))
 
