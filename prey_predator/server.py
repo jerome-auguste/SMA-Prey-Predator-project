@@ -50,7 +50,7 @@ def wolf_sheep_portrayal(agent):
                         "h": 1}
         else:
             portrayal = {"Shape": "rect",
-                        "Color": "yellow",
+                        "Color": "#ffffe0",
                         "Filled": "true",
                         "Layer": 0,
                         "w": 1,

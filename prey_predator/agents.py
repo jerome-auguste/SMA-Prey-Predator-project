@@ -21,6 +21,14 @@ class Sheep(RandomWalker):
             a = Sheep(self.model.next_id(), self.pos, self.model, self.moore, energy=20)
             self.model.schedule.add(a)
             self.model.grid.place_agent(a, self.pos)
+            
+    def try_eat(self):
+        cell_agents = self.model.grid.get_cell_list_contents([self.pos])
+        for agent in cell_agents:
+            if isinstance(agent, GrassPatch) and agent.fully_grown:
+                self.energy += self.model.sheep_gain_from_food
+                agent.fully_grown = False
+                break
 
     def step(self):
         """
@@ -30,6 +38,7 @@ class Sheep(RandomWalker):
         self.random_move()
         self.energy -= 1
         self.try_reproduce()
+        self.try_eat()
         
 
 
@@ -49,12 +58,23 @@ class Wolf(RandomWalker):
             a = Wolf(self.model.next_id(), self.pos, self.model, self.moore, energy=20)
             self.model.schedule.add(a)
             self.model.grid.place_agent(a, self.pos)
+    
+    def try_eat(self):
+        cell_agents = self.model.grid.get_cell_list_contents([self.pos])
+        for agent in cell_agents:
+            if isinstance(agent, Sheep):
+                self.energy += self.model.wolf_gain_from_food
+                self.model.schedule.remove(agent)
+                self.model.grid.remove_agent(agent)
+                break
+        
 
     def step(self):
         # ... to be completed
         self.random_move()
         self.energy -= 1
         self.try_reproduce()
+        self.try_eat()
         
 
 
@@ -75,6 +95,15 @@ class GrassPatch(Agent):
         # ... to be completed
         self.fully_grown = fully_grown
         self.countdown = countdown
+        self.current_countdown = self.countdown
+    
+    def grow(self):
+        if not self.fully_grown and self.current_countdown > 0:
+            self.current_countdown -= 1
+        else:
+            self.current_countdown = self.countdown
+            self.fully_grown = True
 
-    # def step(self):
-    # ... to be completed
+    def step(self):
+        # ... to be completed
+        self.grow()
