@@ -91,3 +91,21 @@ def test_try_die_from_energy():
     
     first_sheep.try_die_from_energy()
     assert model.schedule.get_breed_count(Sheep) == initial_sheeps - 1
+
+
+def test_grow():
+    # Set up the model with 1 cell (all agents will be set on the same cell)
+    model = WolfSheep(width=1, height=1, initial_wolves=0, initial_sheep=1, initial_sheep_energy=1)
+    
+    # One sheep looses energy
+    first_sheep = next(iter(model.schedule.agents_by_breed[Sheep].values()))
+    first_sheep.try_eat()
+    
+    # The only grass patch the sheep has eaten
+    grass_patch = next(iter(model.schedule.agents_by_breed[GrassPatch].values()))
+    assert grass_patch.fully_grown == False
+    
+    for _ in range(grass_patch.countdown):
+        grass_patch.grow()
+    
+    assert grass_patch.fully_grown == True
