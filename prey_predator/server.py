@@ -16,22 +16,26 @@ def wolf_sheep_portrayal(agent):
     if isinstance(agent, Sheep):
         # ... to be completed
         portrayal = {"Shape": f"{os.path.dirname(os.path.realpath(__file__))}/sheep.png",
-                     "x": 0,
-                     "y": 0,
-                     "scale": 0.5,
-                     "Layer": 1}
+                    "x": 0,
+                    "y": 0,
+                    "scale": 0.5,
+                    "Layer": 1,
+                    "text": agent.energy}
+
         # portrayal = {"Shape": "circle",
         #             "Color": "white",
         #             "Filled": "true",
         #             "Layer": 1,
         #             "r": 0.5}
+
     elif isinstance(agent, Wolf):
         # ... to be completed
         portrayal = {"Shape": f"{os.path.dirname(os.path.realpath(__file__))}/wolf.png",
-                     "x": 0,
-                     "y": 0,
-                     "scale": 0.5,
-                     "Layer": 1}
+                    "x": 0,
+                    "y": 0,
+                    "scale": 0.5,
+                    "Layer": 1,
+                    "text": agent.energy}
         
         # portrayal = {"Shape": "circle",
         #             "Color": "red",
