@@ -29,6 +29,12 @@ class Sheep(RandomWalker):
                 self.energy += self.model.sheep_gain_from_food
                 agent.fully_grown = False
                 break
+    
+    def try_die_from_energy(self):
+        if self.energy == 0:
+            self.model.schedule.remove(self)
+            self.model.grid.remove_agent(self)
+            
 
     def step(self):
         """
@@ -39,6 +45,7 @@ class Sheep(RandomWalker):
         self.energy -= 1
         self.try_reproduce()
         self.try_eat()
+        self.try_die_from_energy()
         
 
 
@@ -67,6 +74,11 @@ class Wolf(RandomWalker):
                 self.model.schedule.remove(agent)
                 self.model.grid.remove_agent(agent)
                 break
+    
+    def try_die_from_energy(self):
+        if self.energy == 0:
+            self.model.schedule.remove(self)
+            self.model.grid.remove_agent(self)
         
 
     def step(self):
@@ -75,6 +87,7 @@ class Wolf(RandomWalker):
         self.energy -= 1
         self.try_reproduce()
         self.try_eat()
+        self.try_die_from_energy()
         
 
 
