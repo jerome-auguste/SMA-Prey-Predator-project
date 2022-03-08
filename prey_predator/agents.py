@@ -17,7 +17,7 @@ class Sheep(RandomWalker):
         self.energy = energy
         
     def try_reproduce(self): # TODO : introduce energy consumption
-        if self.random.random() < self.model.sheep_reproduce:
+        if self.random.random() <= self.model.sheep_reproduce:
             a = Sheep(self.model.next_id(), self.pos, self.model, self.moore, energy=20)
             self.model.schedule.add(a)
             self.model.grid.place_agent(a, self.pos)
@@ -45,7 +45,7 @@ class Wolf(RandomWalker):
         self.energy = energy
     
     def try_reproduce(self): # TODO : introduce energy consumption
-        if self.random.random() < self.model.sheep_reproduce:
+        if self.random.random() <= self.model.wolf_reproduce:
             a = Wolf(self.model.next_id(), self.pos, self.model, self.moore, energy=20)
             self.model.schedule.add(a)
             self.model.grid.place_agent(a, self.pos)
