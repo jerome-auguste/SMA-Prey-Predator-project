@@ -113,9 +113,8 @@ class GrassPatch(Agent):
         self.current_countdown = self.countdown
     
     def grow(self):
-        if not self.fully_grown and self.current_countdown > 0:
-            self.current_countdown -= 1
-        else:
+        self.current_countdown -= 1
+        if self.fully_grown or self.current_countdown == 0:
             self.current_countdown = self.countdown
             self.fully_grown = True
 
