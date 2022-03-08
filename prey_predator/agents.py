@@ -16,9 +16,10 @@ class Sheep(RandomWalker):
         super().__init__(unique_id, pos, model, moore=moore)
         self.energy = energy
         
-    def try_reproduce(self): # TODO : introduce energy consumption
+    def try_reproduce(self):
         if self.random.random() <= self.model.sheep_reproduce:
-            a = Sheep(self.model.next_id(), self.pos, self.model, self.moore, energy=20)
+            self.energy //= 2
+            a = Sheep(self.model.next_id(), self.pos, self.model, self.moore, energy=self.energy)
             self.model.schedule.add(a)
             self.model.grid.place_agent(a, self.pos)
             
@@ -31,7 +32,7 @@ class Sheep(RandomWalker):
                 break
     
     def try_die_from_energy(self):
-        if self.energy == 0:
+        if self.energy <= 0:
             self.model.schedule.remove(self)
             self.model.grid.remove_agent(self)
             
@@ -60,9 +61,10 @@ class Wolf(RandomWalker):
         super().__init__(unique_id, pos, model, moore=moore)
         self.energy = energy
     
-    def try_reproduce(self): # TODO : introduce energy consumption
+    def try_reproduce(self):
         if self.random.random() <= self.model.wolf_reproduce:
-            a = Wolf(self.model.next_id(), self.pos, self.model, self.moore, energy=20)
+            self.energy //= 2
+            a = Wolf(self.model.next_id(), self.pos, self.model, self.moore, energy=self.energy)
             self.model.schedule.add(a)
             self.model.grid.place_agent(a, self.pos)
     
@@ -76,7 +78,7 @@ class Wolf(RandomWalker):
                 break
     
     def try_die_from_energy(self):
-        if self.energy == 0:
+        if self.energy <= 0:
             self.model.schedule.remove(self)
             self.model.grid.remove_agent(self)
         
