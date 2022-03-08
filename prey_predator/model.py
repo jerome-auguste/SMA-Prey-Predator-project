@@ -52,7 +52,7 @@ class WolfSheep(Model):
                  grass=True,
                  grass_regrowth_time=30,
                  sheep_gain_from_food=4,
-                 initial_grass_countdown=10,
+                 grass_countdown=10,
                  initial_sheep_energy=10,
                  initial_wolf_energy=10):
         """
@@ -81,7 +81,7 @@ class WolfSheep(Model):
         self.grass = grass
         self.grass_regrowth_time = grass_regrowth_time
         self.sheep_gain_from_food = sheep_gain_from_food
-        self.initial_grass_countdown = initial_grass_countdown
+        self.grass_countdown = grass_countdown
         self.initial_sheep_energy = initial_sheep_energy
         self.initial_wolf_energy = initial_wolf_energy
 
@@ -121,7 +121,7 @@ class WolfSheep(Model):
                 a = GrassPatch(self.next_id(), (x, y),
                                self,
                                fully_grown=True,
-                               countdown=self.initial_grass_countdown)
+                               countdown=self.grass_countdown)
                 self.schedule.add(a)
                 self.grid.place_agent(a, (x, y))
 
