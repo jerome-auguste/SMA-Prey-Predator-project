@@ -51,7 +51,7 @@ Run the server
 
 The parameters that can be modified are:
 
- - Number of Wolves and Sheeps on the grid before start (0-200)
+ - Number of Wolves and Sheeps on the grid before start (10-200)
  - Reproduction rate of Wolves and Sheeps (0-1)
  - Energy gained from eating Sheep (1-50)
  - Energy gained from eating Grass (1-20)
