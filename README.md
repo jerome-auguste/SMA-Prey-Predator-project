@@ -55,17 +55,32 @@ The parameters that can be modified are:
  - Reproduction rate of Wolves and Sheeps (0-1)
  - Energy gained from eating Sheep (1-50)
  - Energy gained from eating Grass (1-20)
- - Energy at creation both for Wolves and Sheeps (1-100)
+ - Energy at creation for Wolves and Sheeps (1-100)
  - Grass growing time (1-100)
  - Chasing mode (True/False)
 
 The optimal parameters were : 
+
+| Parameters                      | Value  |
+| --------------------------------|--------|
+| Number of Wolves at start       | 10     |
+| Number of Sheeps at start       | 40     |
+| Reproduction rate of Wolves     | 0.09   |
+| Reproduction rate of Sheeps     | 0.09   |
+| Energy gained from eating Sheep | 10     |
+| Energy gained from eating Grass | 10     |
+| Energy at creation for Wolves   | 4      |
+| Energy at creation for Sheeps   | 10     |
+| Grass growing time              | 10     |
+| Chasing mode                    | False  |
 
 
 
 ## Results
 
 Screen shot du résultat
+
+![Capture d’écran (200)](https://user-images.githubusercontent.com/51906903/157895818-c2af1910-acf4-4bca-8fe9-0824dadea255.png)
 
 Observations : 
 
