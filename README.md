@@ -71,16 +71,15 @@ The optimal parameters were :
 | Energy gained from eating Grass | 10     |
 | Energy at creation for Wolves   | 4      |
 | Energy at creation for Sheeps   | 10     |
-| Grass growing time              | 10     |
+| Grass growing time              | 16     |
 | Chasing mode                    | False  |
 
 
 
 ## Results
 
-Screen shot du résultat
-
-![Capture d’écran (200)](https://user-images.githubusercontent.com/51906903/157895818-c2af1910-acf4-4bca-8fe9-0824dadea255.png)
+![Capture d’écran (204)](https://user-images.githubusercontent.com/51906903/157899361-148b092e-0149-4fdd-a9ef-dbc0149fde32.png)
 
 Observations : 
-
+At the begining, the sheep population grows very fast. As the sheep population grows, the wolf population start to grow too and the sheep population size decrease. 
+In the end there is a good balance between the two populations.
