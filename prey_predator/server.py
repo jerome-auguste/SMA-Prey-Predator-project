@@ -75,7 +75,8 @@ model_params = {
     "sheep_gain_from_food": UserSettableParameter("slider", "Energy gained from eating grass", 4, 1, 20, 1),
     "initial_sheep_energy": UserSettableParameter("slider", "Sheep energy at creation", 10, 1, 100, 1),
     
-    "grass_countdown": UserSettableParameter("slider", "Grass growing time after being eaten", 30, 1, 100, 1)
+    "grass_countdown": UserSettableParameter("slider", "Grass growing time after being eaten", 30, 1, 100, 1),
+    "chasing_mode": UserSettableParameter("checkbox", "Chasing mode", False)
 }
 
 canvas_element = CanvasGrid(wolf_sheep_portrayal, 20, 20, 500, 500)
