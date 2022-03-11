@@ -7,10 +7,12 @@
 
 ## Description of the project
 
-In the class of SMA we had to develop a simple model consisting of three agent types: wolves, sheep, and grass evolving in a space represented as a grid.
-Agents actions : 
-   Sheep and Wolf : eat, reproduce, move
-   GrassPatch : eaten by the sheeps, when eaten take some time to fully grow again.
+In the class of SMA we had to develop a simple model consisting of three agent types: Wolf, Wheep and GrassPatch. 
+All agents evolve in a space represented by a grid.
+
+Agents' possible actions : 
+   - Sheep and Wolf : eat, reproduce, move
+   - GrassPatch : when eaten by a Sheep, take some time to fully grow again, is eaten by the Sheeps
 
 
 ## Run the code
@@ -35,20 +37,27 @@ Run the server
 
 ## Implementation
 
-- Icons and current energy : on the grid, sheeps and wolves are both represented with icons and their current energy.![Capture d’écran (199)](https://user-images.githubusercontent.com/51906903/157892026-ebec08d5-3fe3-4cef-adff-2e663a694c16.png)
+- Display icons and current energy : on the grid Sheeps and Wolves are both represented by icons with their current energy.
 
-- Chasing mode : at first the movements of the sheeps and wolves were at random. To obtain better results, we implemented a real Wolf and Sheep movement behaviour (Wolves chasing sheeps, Sheeps running away from wolves).
+![Capture d’écran (199)](https://user-images.githubusercontent.com/51906903/157892026-ebec08d5-3fe3-4cef-adff-2e663a694c16.png)
 
-- Tests : we designed tests to verify our code (à compléter) 
+- Chasing mode : at first the movements of the Sheeps and Wolves were at random. To obtain better results, we implemented a real Wolf and Sheep movement behaviour (Wolves chasing sheeps, Sheeps running away from wolves).
+
+- Energy gained : we decided to quantify the energy gained by a Wolf to the energy of the Sheep he eats.
+
+- Tests (à compléter) 
 
 ## Parameters
 
-The parameters we could change were : 
- - Number of wolves and sheeps at the begining on the grid
- - Reproduction rate of wolves and sheeps
- - Energy at creation of wolves and sheeps
- - Grass growing time 
- - Chasing mode 
+The parameters that can be modified are:
+
+ - Number of Wolves and Sheeps on the grid before start (0-200)
+ - Reproduction rate of Wolves and Sheeps (0-1)
+ - Energy gained from eating Sheep (1-50)
+ - Energy gained from eating Grass (1-20)
+ - Energy at creation both for Wolves and Sheeps (1-100)
+ - Grass growing time (1-100)
+ - Chasing mode (True/False)
 
 The optimal parameters were : 
 
