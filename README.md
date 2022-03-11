@@ -69,7 +69,7 @@ The parameters that can be modified are:
 - Grass growing time (1-100)
 - Chasing mode (True/False)
 
-The optimal parameters were: 
+These values were the equilibrium we found for this model. Changing one value makes it unstable unless we find the right equilibrium for all the other parameters: 
 
 | Parameters                      | Value  |
 | --------------------------------|--------|
