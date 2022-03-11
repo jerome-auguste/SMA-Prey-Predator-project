@@ -7,23 +7,33 @@
 
 ## Description of the project
 
-In the class of SMA we had to develop a simple model consisting of three agent types: Wolf, Wheep and GrassPatch. 
+In the class of SMA we had to develop a simple model consisting of three agent types: Wolf, Wheep and GrassPatch.
 All agents evolve in a space represented by a grid.
 
-Agents' possible actions : 
-   - Sheep and Wolf : eat, reproduce, move
-   - GrassPatch : when eaten by a Sheep, take some time to fully grow again, is eaten by the Sheeps
+Agents' possible actions:
+
+   - Sheep and Wolf: eat, reproduce, move
+   - GrassPatch: when eaten by a Sheep, take some time to fully grow again, is eaten by the Sheeps
 
 
 ## Run the code
 
-Install requirements  
+Install requirements 
+
 ```bash
     pip install -r requirements.txt
 ```
+
 Run the server
+
 ```bash
     mesa runserver
+```
+
+or, at the root of the project
+
+```bash
+    python ./run.py
 ```
 
 ## Organisation of the project
@@ -37,29 +47,29 @@ Run the server
 
 ## Implementation
 
-- Display icons and current energy : on the grid Sheeps and Wolves are both represented by icons with their current energy.
+- Display icons and current energy: on the grid Sheeps and Wolves are both represented by icons with their current energy.
 
 ![Capture d’écran (199)](https://user-images.githubusercontent.com/51906903/157892026-ebec08d5-3fe3-4cef-adff-2e663a694c16.png)
 
-- Chasing mode : at first the movements of the Sheeps and Wolves were at random. To obtain better results, we implemented a real Wolf and Sheep movement behaviour (Wolves chasing sheeps, Sheeps running away from wolves).
+- Chasing mode: at first the movements of the Sheeps and Wolves were at random. To obtain better results, we implemented a real Wolf and Sheep movement behaviour (Wolves chasing sheeps, Sheeps running away from wolves).
 
-- Energy gained : we decided to quantify the energy gained by a Wolf to the energy of the Sheep he eats.
+- Energy gained: we decided to quantify the energy gained by a Wolf to the energy of the Sheep he eats.
 
-- Tests (à compléter) 
+- Tests: some unit tests can be run on the agents using pytest
 
 ## Parameters
 
 The parameters that can be modified are:
 
- - Number of Wolves and Sheeps on the grid before start (10-200)
- - Reproduction rate of Wolves and Sheeps (0-1)
- - Energy gained from eating Sheep (1-50)
- - Energy gained from eating Grass (1-20)
- - Energy at creation for Wolves and Sheeps (1-100)
- - Grass growing time (1-100)
- - Chasing mode (True/False)
+- Number of Wolves and Sheeps on the grid before start (10-200)
+- Reproduction rate of Wolves and Sheeps (0-1)
+- Energy gained from eating Sheep (1-50)
+- Energy gained from eating Grass (1-20)
+- Energy at creation for Wolves and Sheeps (1-100)
+- Grass growing time (1-100)
+- Chasing mode (True/False)
 
-The optimal parameters were : 
+The optimal parameters were: 
 
 | Parameters                      | Value  |
 | --------------------------------|--------|
@@ -80,6 +90,7 @@ The optimal parameters were :
 
 ![Capture d’écran (204)](https://user-images.githubusercontent.com/51906903/157899361-148b092e-0149-4fdd-a9ef-dbc0149fde32.png)
 
-Observations : 
-At the begining, the Sheep population grows very fast. As the Sheep population grows, the Wolf population starts to grow too and the Sheep population size decreases. 
-In the end there is a good balance between the two populations.
+### Analysis
+
+At the initialization of the environment, grass patches are all fully grown so that sheeps can eat them and live longer (increasing reproduction chance). However, as soon as the sheep population increases, it gives more oportunities for wolves to eat and live longer (and so to reproduce). Therefore, wolves population grows and sheeps die faster (being eaten). Then at a certain point, wolves are not able to eat anymore and die from fatigue whereas free sheeps start to reproduce again while eating more fully grown grass.
+Then the model oscillates again and again.

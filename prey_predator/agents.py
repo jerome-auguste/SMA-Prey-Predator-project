@@ -1,5 +1,4 @@
 """Agents definition classes (Sheep, Wolf or GrassPatch)"""
-import operator
 from mesa import Agent
 from prey_predator.random_walk import RandomWalker
 
@@ -26,6 +25,10 @@ class Sheep(RandomWalker):
             self.model.grid.place_agent(a, self.pos)
 
     def try_eat(self):
+        """
+        If a fully grown grass patch is placed at the Sheep's cell,
+        Sheep eats it and gain energy
+        """
         cell_agents = self.model.grid.get_cell_list_contents([self.pos])
         for agent in cell_agents:
             if isinstance(agent, GrassPatch) and agent.fully_grown:
@@ -34,11 +37,19 @@ class Sheep(RandomWalker):
                 break
 
     def try_die_from_energy(self):
+        """
+        Dies from fatigue
+        """
         if self.energy <= 0:
             self.model.schedule.remove(self)
             self.model.grid.remove_agent(self)
 
     def runaway_move(self):
+        """
+        Moves according to position of Wolf in its neighborhood
+        Each cell of its neighborhood has a score according to its relative
+        position from potential Wolf and fully grown grass position
+        """
         neighbor_cells = self.model.grid.get_neighborhood(self.pos,
                                                           moore=self.moore,
                                                           include_center=False)
@@ -48,13 +59,13 @@ class Sheep(RandomWalker):
             cell_agents = self.model.grid.get_cell_list_contents([neighbor_cell])
             for agent in cell_agents:
                 if isinstance(agent, Wolf):
-                    neighbor_score[agent.pos] -= 2
+                    neighbor_score[agent.pos] -= 2 # Wolf position
                     enemy_possible_moves = self.model.grid.get_neighborhood(
                         agent.pos, moore=self.moore, include_center=False)
                     for bad_position in (set(enemy_possible_moves) & set(neighbor_cells)):
-                        neighbor_score[bad_position] -= 1 
+                        neighbor_score[bad_position] -= 1 # Wolf neighborhood
                 if isinstance(agent, GrassPatch) and agent.fully_grown:
-                    neighbor_score[agent.pos] += 1
+                    neighbor_score[agent.pos] += 1 # Fully grown grass patch position
         move_score = list(neighbor_score.items())
         self.random.shuffle(move_score)
         next_move = max(move_score, key = lambda x: x[1])[0]
@@ -96,6 +107,9 @@ class Wolf(RandomWalker):
             self.model.grid.place_agent(a, self.pos)
 
     def try_eat(self):
+        """
+        If a Sheep is at the same cell as the Wolf, the 
+        """
         cell_agents = self.model.grid.get_cell_list_contents([self.pos])
         for agent in cell_agents:
             if isinstance(agent, Sheep):
@@ -106,11 +120,18 @@ class Wolf(RandomWalker):
                 break
 
     def try_die_from_energy(self):
+        """
+        Dies from fatigue
+        """
         if self.energy <= 0:
             self.model.schedule.remove(self)
             self.model.grid.remove_agent(self)
 
     def chasing_move(self):
+        """
+        Moves towards sheep position
+        Each neighbor cell is set a score and the maximum is chosen as the one to move to
+        """
         neighbor_cells = self.model.grid.get_neighborhood(self.pos,
                                                           moore=self.moore,
                                                           include_center=False)
@@ -160,6 +181,10 @@ class GrassPatch(Agent):
         self.current_countdown = self.countdown
 
     def grow(self):
+        """
+        Countdown before getting fully grown
+        after being eaten
+        """
         self.current_countdown -= 1
         if self.fully_grown or self.current_countdown == 0:
             self.current_countdown = self.countdown

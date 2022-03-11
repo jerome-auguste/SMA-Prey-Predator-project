@@ -65,17 +65,17 @@ def wolf_sheep_portrayal(agent):
 
 model_params = {
     # ... to be completed
-    "initial_wolves": UserSettableParameter("slider", "Initial number of wolves", 50, 10, 200, 1),
-    "wolf_reproduce": UserSettableParameter("slider", "Wolf reproduce rate", 0.05, 0, 1, 0.01),
-    "wolf_gain_from_food": UserSettableParameter("slider", "Energy gained from eating sheep", 20, 1, 50, 1),
-    "initial_wolf_energy": UserSettableParameter("slider", "Wolf energy at creation", 10, 1, 100, 1),
+    "initial_wolves": UserSettableParameter("slider", "Initial number of wolves", 10, 10, 200, 1),
+    "wolf_reproduce": UserSettableParameter("slider", "Wolf reproduce rate", 0.09, 0, 1, 0.01),
+    "wolf_gain_from_food": UserSettableParameter("slider", "Energy gained from eating sheep", 10, 1, 50, 1),
+    "initial_wolf_energy": UserSettableParameter("slider", "Wolf energy at creation", 4, 1, 100, 1),
 
-    "initial_sheep": UserSettableParameter("slider", "Initial number of sheeps", 100, 10, 200, 1),
-    "sheep_reproduce": UserSettableParameter("slider", "Sheep reproduce rate", 0.04, 0, 1, 0.01),
-    "sheep_gain_from_food": UserSettableParameter("slider", "Energy gained from eating grass", 4, 1, 20, 1),
+    "initial_sheep": UserSettableParameter("slider", "Initial number of sheeps", 40, 10, 200, 1),
+    "sheep_reproduce": UserSettableParameter("slider", "Sheep reproduce rate", 0.09, 0, 1, 0.01),
+    "sheep_gain_from_food": UserSettableParameter("slider", "Energy gained from eating grass", 10, 1, 20, 1),
     "initial_sheep_energy": UserSettableParameter("slider", "Sheep energy at creation", 10, 1, 100, 1),
     
-    "grass_countdown": UserSettableParameter("slider", "Grass growing time after being eaten", 30, 1, 100, 1),
+    "grass_countdown": UserSettableParameter("slider", "Grass growing time after being eaten", 16, 1, 100, 1),
     "chasing_mode": UserSettableParameter("checkbox", "Chasing mode", False)
 }
 
