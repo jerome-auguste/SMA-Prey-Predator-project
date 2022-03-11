@@ -109,3 +109,5 @@ def test_grow():
         grass_patch.grow()
     
     assert grass_patch.fully_grown == True
+    
+# TODO : Test chasing mode
