@@ -81,5 +81,5 @@ The optimal parameters were :
 ![Capture d’écran (204)](https://user-images.githubusercontent.com/51906903/157899361-148b092e-0149-4fdd-a9ef-dbc0149fde32.png)
 
 Observations : 
-At the begining, the sheep population grows very fast. As the sheep population grows, the wolf population start to grow too and the sheep population size decrease. 
+At the begining, the Sheep population grows very fast. As the Sheep population grows, the Wolf population starts to grow too and the Sheep population size decreases. 
 In the end there is a good balance between the two populations.
